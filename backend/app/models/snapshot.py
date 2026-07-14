@@ -1,3 +1,5 @@
+# backend/app/models/snapshot.py
+
 from sqlalchemy import Column, Integer, ForeignKey, Text, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -11,19 +13,23 @@ class Snapshot(Base):
     # Primary Key
     id = Column(Integer, primary_key=True, index=True)
 
-    # Which competitor this snapshot belongs to
+    # Foreign Key
     competitor_id = Column(
         Integer,
         ForeignKey("competitors.id"),
         nullable=False
     )
 
-    # Scraped Information
+    # Scraped Data
+    page_title = Column(Text, nullable=True)
+
+    raw_html = Column(Text, nullable=True)
+
+    page_content = Column(Text, nullable=True)
+
     pricing = Column(Text, nullable=True)
 
     features = Column(Text, nullable=True)
-
-    page_content = Column(Text, nullable=True)
 
     # Timestamp
     snapshot_date = Column(

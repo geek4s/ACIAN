@@ -1,4 +1,7 @@
+# backend/app/main.py
+
 from fastapi import FastAPI
+from app.api.ingestion import router as ingestion_router
 
 from app.database.database import Base, engine
 from app.models import *
@@ -11,7 +14,7 @@ app = FastAPI(
     title="ACIAN API",
     version="1.0.0"
 )
-
+app.include_router(ingestion_router)
 app.include_router(auth_router)
 app.include_router(competitor_router)
 
