@@ -1,5 +1,3 @@
-# backend/app/models/user.py
-
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -20,22 +18,16 @@ class User(Base):
 
     password_hash = Column(String(255), nullable=False)
 
-    created_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now()
-    )
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     # Relationships
-
-    # Tracks which competitors this user follows
-    tracked_competitors = relationship(
-        "UserCompetitor",
+    competitors = relationship(
+        "Competitor",
         back_populates="user",
         cascade="all, delete-orphan"
     )
-
     reports = relationship(
-        "Report",
-        back_populates="user",
-        cascade="all, delete-orphan"
+    "Report",
+    back_populates="user",
+    cascade="all, delete-orphan"
     )

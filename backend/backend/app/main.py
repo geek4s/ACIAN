@@ -1,7 +1,6 @@
 # backend/app/main.py
 
 from fastapi import FastAPI
-from app.api import search
 from app.api.ingestion import router as ingestion_router
 
 from app.database.database import Base, engine
@@ -18,7 +17,7 @@ app = FastAPI(
 app.include_router(ingestion_router)
 app.include_router(auth_router)
 app.include_router(competitor_router)
-app.include_router(search.router)
+
 @app.get("/")
 def root():
     return {"message": "Welcome to ACIAN API"}
