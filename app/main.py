@@ -8,6 +8,8 @@ from app.database.database import Base, engine
 from app.models import *
 from app.api.auth import router as auth_router
 from app.api.competitors import router as competitor_router
+from app.api.test import router as test_router
+
 
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +21,7 @@ app.include_router(ingestion_router)
 app.include_router(auth_router)
 app.include_router(competitor_router)
 app.include_router(search.router)
+app.include_router(test_router)
 @app.get("/")
 def root():
     return {"message": "Welcome to ACIAN API"}

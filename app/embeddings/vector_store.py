@@ -1,5 +1,5 @@
+# backend/app/embeddings/vector_store.py
 import chromadb
-
 
 class VectorStore:
 
@@ -28,13 +28,20 @@ class VectorStore:
             metadatas=[metadata]
         )
 
+    # backend/app/embeddings/vector_store.py
+
     def search(
         self,
         query_embedding,
-        n_results=3
+        n_results=3,
+        competitor_id=None
     ):
-
-        return self.collection.query(
-            query_embeddings=[query_embedding],
-            n_results=n_results
-        )
+        query = {
+            "query_embeddings": [query_embedding],
+            "n_results": n_results
+        }
+        if competitor_id is not None:
+            query["where"] = {
+                "competitor_id": competitor_id
+            }
+            return self.collection.query(**query)

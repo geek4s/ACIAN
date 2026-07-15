@@ -12,9 +12,10 @@ def test_comparison_agent():
     print(result["comparison"])
     assert "comparison" in result
     assert isinstance(result["comparison"], str)
-    assert len(result["comparison"]) > 0
+    assert len(result["comparison"]) > 0 
 
-    """assert (
+"""assert (
         "Comparison Summary" in result["comparison"]
         or "No previous snapshot available." in result["comparison"]
     )"""
+

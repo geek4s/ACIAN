@@ -52,10 +52,14 @@ def ingest_competitor(
     # -----------------------------
     # Chunk Page
     # -----------------------------
+    # 2. Chunk the page
     chunks = TextChunker.chunk(
-        snapshot.page_content
+       snapshot.page_content
     )
-
+    if not chunks:
+        raise ValueError(
+        f"No text chunks were generated for competitor {competitor_id}."
+        )
     # -----------------------------
     # Store Embeddings
     # -----------------------------
